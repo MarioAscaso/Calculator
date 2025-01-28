@@ -23,15 +23,11 @@ public class MainCalculator {
     private static final int EXIT = 7;
 
     private static int optionMenu;
-    private static int operator1;
-    private static int operator2;
-    private static float component1;
-    private static float component2;
-    private static float realPart;
-    private static float imaginaryPart;
 
     private static int[] listaInt;
     private static float[] listaFloat;
+    private static Vector[] listaVector;
+    private static ComplexNumber[] listaCN;
 
     private static Output output;
     private static Input input;
@@ -50,6 +46,8 @@ public class MainCalculator {
 
         listaInt = new int[2];
         listaFloat = new float[2];
+        listaVector = new Vector[2];
+        listaCN = new ComplexNumber[2];
 
         boolean isValidOptionMenu;
         boolean isValidDivide;
@@ -60,7 +58,7 @@ public class MainCalculator {
                 showMenu();
                 askOptionMenu();
                 getOptionMenu();
-                isValidOptionMenu=isValidOptionMenu();
+                isValidOptionMenu = isValidOptionMenu();
             }while(!isValidOptionMenu);
 
             switch (optionMenu) {
@@ -69,7 +67,7 @@ public class MainCalculator {
                     getOperator1();
                     askOperator();
                     getOperator2();
-                    result = add(operator1, operator2);
+                    result = add();
                     System.out.println(result);
                     break;
                 case SUBTRACT:
@@ -77,7 +75,7 @@ public class MainCalculator {
                     getOperator1();
                     askOperator();
                     getOperator2();
-                    result = subtract(operator1, operator2);
+                    result = subtract();
                     System.out.println(result);
                     break;
                 case MULTIPLY:
@@ -85,7 +83,7 @@ public class MainCalculator {
                     getOperator1();
                     askOperator();
                     getOperator2();
-                    result = multiply(operator1, operator2);
+                    result = multiply();
                     System.out.println(result);
                     break;
                 case DIVIDE:
@@ -101,7 +99,7 @@ public class MainCalculator {
                             isValidDivide = isValidDivide();
                         } while (!isValidDivide);
                     }
-                    result = divide(operator1, operator2);
+                    result = divide();
                     System.out.println(result);
                     break;
                 case ADD_VECTORS:
@@ -109,16 +107,13 @@ public class MainCalculator {
                     getComponent1();
                     askComponent();
                     getComponent2();
-                    Vector v1 = new Vector(component1, component2);
-
+                    listaVector[0] = new Vector(listaFloat[0], listaFloat[1]);
                     askComponent();
                     getComponent1();
                     askComponent();
                     getComponent2();
-                    Vector v2 = new Vector(component1, component2);
-
-                    Vector vector = addVector(v1, v2);
-
+                    listaVector[1] = new Vector(listaFloat[0], listaFloat[1]);
+                    Vector vector = addVector();
                     System.out.println(vector);
                     break;
                 case ADD_COMPLEX_NUMBERS:
@@ -126,16 +121,13 @@ public class MainCalculator {
                     getRealPart();
                     askImaginaryPart();
                     getImaginaryPart();
-                    ComplexNumber cn1 = new ComplexNumber(realPart, imaginaryPart);
-
+                    listaCN[0] = new ComplexNumber(listaFloat[0], listaFloat[1]);
                     askRealPart();
                     getRealPart();
                     askImaginaryPart();
                     getImaginaryPart();
-                    ComplexNumber cn2 = new ComplexNumber(realPart, imaginaryPart);
-
-                    ComplexNumber complexNumber = addComplexNumber(cn1, cn2);
-
+                    listaCN[1] = new ComplexNumber(listaFloat[0], listaFloat[1]);
+                    ComplexNumber complexNumber = addComplexNumber();
                     System.out.println(complexNumber);
                     break;
                 default:
@@ -147,28 +139,28 @@ public class MainCalculator {
 
     public static void showMenu(){output.showMenu();}
     public static void askOptionMenu(){output.askOptionMenu();}
-    public static void getOptionMenu(){optionMenu = input.getOptionMenu();}
+    public static void getOptionMenu(){optionMenu = input.getInt();}
     public static boolean isValidOptionMenu(){return validator.isValidOptionMenu(optionMenu);}
 
     public static void askOperator(){output.askOperator();}
-    public static void getOperator1(){operator1 = input.getOperator();}
-    public static void getOperator2(){operator2 = input.getOperator();}
-    public static boolean isValidDivide(){return validator.isValidDivide(operator2);}
+    public static void getOperator1(){listaInt[0] = input.getInt();}
+    public static void getOperator2(){listaInt[1] = input.getInt();}
+    public static boolean isValidDivide(){return validator.isValidDivide(listaInt[1]);}
 
-    public static int add(int operator1, int operator2){return mathematical.add(operator1, operator2);}
-    public static int subtract(int operator1, int operator2){return mathematical.subtract(operator1, operator2);}
-    public static int multiply(int operator1, int operator2){return mathematical.multiply(operator1, operator2);}
-    public static int divide(int operator1, int operator2){return mathematical.divide(operator1, operator2);}
+    public static int add(){return mathematical.add(listaInt[0], listaInt[1]);}
+    public static int subtract(){return mathematical.subtract(listaInt[0], listaInt[1]);}
+    public static int multiply(){return mathematical.multiply(listaInt[0], listaInt[1]);}
+    public static int divide(){return mathematical.divide(listaInt[0], listaInt[1]);}
 
     public static void askComponent(){output.askComponent();}
-    public static void getComponent1(){component1=input.getComponent();}
-    public static void getComponent2(){component2=input.getComponent();}
-    public static Vector addVector(Vector v1, Vector v2){return vector.addVector(v1, v2);}
+    public static void getComponent1(){listaFloat[0] = input.getFloat();}
+    public static void getComponent2(){listaFloat[1] = input.getFloat();}
+    public static Vector addVector(){return vector.addVector(listaVector[0], listaVector[1]);}
 
     public static void askRealPart(){output.askRealPart();}
     public static void askImaginaryPart(){output.askImaginaryPart();}
-    public static void getRealPart(){realPart = input.getComponent();}
-    public static void getImaginaryPart(){imaginaryPart = input.getComponent();}
-    public static ComplexNumber addComplexNumber(ComplexNumber cn1, ComplexNumber cn2){return complexNumber.addComplexNumber(cn1, cn2);}
+    public static void getRealPart(){listaFloat[0] = input.getFloat();}
+    public static void getImaginaryPart(){listaFloat[1] = input.getFloat();}
+    public static ComplexNumber addComplexNumber(){return complexNumber.addComplexNumber(listaCN[0], listaCN[1]);}
 
 }
