@@ -24,7 +24,7 @@ public class MainCalculator {
 
     private static int optionMenu;
 
-    private static int[] listaInt;
+    private static int[] operandos;
     private static float[] listaFloat;
     private static Vector[] listaVector;
     private static ComplexNumber[] listaCN;
@@ -44,8 +44,9 @@ public class MainCalculator {
         vector = new Vector();
         complexNumber = new ComplexNumber();
 
-        listaInt = new int[2];
+        operandos = new int[2];
         listaFloat = new float[2];
+        
         listaVector = new Vector[2];
         listaCN = new ComplexNumber[2];
 
@@ -143,14 +144,14 @@ public class MainCalculator {
     public static boolean isValidOptionMenu(){return validator.isValidOptionMenu(optionMenu);}
 
     public static void askOperator(){output.askOperator();}
-    public static void getOperator1(){listaInt[0] = input.getInt();}
-    public static void getOperator2(){listaInt[1] = input.getInt();}
-    public static boolean isValidDivide(){return validator.isValidDivide(listaInt[1]);}
+    public static void getOperator1(){operandos[0] = input.getInt();}
+    public static void getOperator2(){operandos[1] = input.getInt();}
+    public static boolean isValidDivide(){return validator.isValidDivide(operandos[1]);}
 
-    public static int add(){return mathematical.add(listaInt[0], listaInt[1]);}
-    public static int subtract(){return mathematical.subtract(listaInt[0], listaInt[1]);}
-    public static int multiply(){return mathematical.multiply(listaInt[0], listaInt[1]);}
-    public static int divide(){return mathematical.divide(listaInt[0], listaInt[1]);}
+    public static int add(){return mathematical.add(operandos[0], operandos[1]);}
+    public static int subtract(){return mathematical.subtract(operandos[0], operandos[1]);}
+    public static int multiply(){return mathematical.multiply(operandos[0], operandos[1]);}
+    public static int divide(){return mathematical.divide(operandos[0], operandos[1]);}
 
     public static void askComponent(){output.askComponent();}
     public static void getComponent1(){listaFloat[0] = input.getFloat();}
