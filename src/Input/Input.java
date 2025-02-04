@@ -2,19 +2,20 @@ package Input;
 import java.util.Scanner;
 
 public class Input{
+
     Scanner sc = new Scanner(System.in);
+    private int valorInt;
+    private float valorFloat;
 
-    public int getOptionMenu(){
-        return sc.nextInt();
+    public void getI(){valorInt = sc.nextInt();}
+    public int getInt(){
+         getI();
+         return valorInt;
     }
-
-    public int getOperator(){
-        return sc.nextInt();
-    }
-
-    public float getComponent(){
-        return sc.nextFloat();
-    }
+    public void getF(){valorFloat = sc.nextFloat();}
+    public float getFloat(){
+        getF();
+        return valorFloat;}
 }
 
 
